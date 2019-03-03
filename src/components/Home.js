@@ -6,7 +6,9 @@ class Home extends Component {
     return (
       <div>
         <Nav />
-        <h1>Welcome to Granplan</h1>
+        <div className="container">
+          <h1>Welcome to Granplan</h1>
+        </div>
       </div>
     );
   }

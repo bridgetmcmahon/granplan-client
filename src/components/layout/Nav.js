@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import Home from '../Home';
-import Login from '../Login';
 import '../../App.css';
 
 class Nav extends Component {
   render() {
     return (
-        <nav className="nav-bar">
-          <div className="container">
+        <nav className="header">
+          <div className="nav-bar">
             <ul>
               <li>
-                <a href="/">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <a href="/login">Login</a>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/appointments">Appointments</Link>
+              </li>
+              <li>
+                <Link to="/">Chat</Link>
               </li>
             </ul>
-            </div>
+          </div>
         </nav>
     );
   }

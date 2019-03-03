@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Appointment from './Appointment';
+import Nav from '../layout/Nav';
+
+import { Link } from 'react-router-dom';
 
 class Appointments extends Component {
   constructor() {
@@ -8,21 +11,30 @@ class Appointments extends Component {
       appointments: [
         {
           id: 1,
-          name: "Doctor's appointment",
+          patient: 'Aileen',
+          purpose: "Doctor's appointment",
           date: "23rd March 2019",
           location: "Brisbane",
+          notes: '',
+          family_member: 'Anne',
         },
         {
           id: 2,
-          name: "Doctor's appointment",
+          patient: 'Aileen',
+          purpose: "Doctor's appointment",
           date: "5th April 2019",
           location: "Brisbane",
+          notes: '',
+          family_member: 'Donna',
         },
         {
           id: 3,
-          name: "Breakfast",
+          patient: 'Aileen',
+          purpose: "Social",
           date: "6th April 2019",
           location: "Brisbane",
+          notes: '',
+          family_member: 'Donna',
         },
       ]
     };
@@ -35,23 +47,32 @@ class Appointments extends Component {
 
     this.setState({
       appointments: newAppointments,
-    })
+    });
   };
 
   render() {
     const { appointments } = this.state;
 
     return (
-      <React.Fragment>
-        <h1>All Appointments</h1>
-        { appointments.map(appointment => (
-          <Appointment
-            key={ appointment.id }
-            appointment={ appointment }
-            deleteClickHandler={ this.deleteAppointment.bind(this, appointment.id) }
-          />
-        ))}
-      </React.Fragment>
+      <div>
+        <Nav />
+        <div className="container">
+          <div className="new-appointment">
+            <h2>New Appointment</h2>
+            <Link to="/appointments/new">
+              <i className="fas fa-plus"></i>
+            </Link>
+          </div>
+          <h1>All Appointments</h1>
+          { appointments.map(appointment => (
+            <Appointment
+              key={ appointment.id }
+              appointment={ appointment }
+              deleteClickHandler={ this.deleteAppointment.bind(this, appointment.id) }
+            />
+          ))}
+        </div>
+      </div>
     );
   }
 }
