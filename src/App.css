@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #616283;
+  --secondary-color: #8182A3;
+}
+
 body {
   margin: 0;
 }
@@ -13,7 +18,7 @@ body {
 }
 
 .header {
-  background-color: #616283;
+  background-color: var(--primary-color);
 }
 
 /* ----- NAVBAR ----- */
@@ -96,9 +101,9 @@ form {
 .form textarea:focus,
 .form select:focus
 {
-	box-shadow: 0 0 5px #616283;
+	box-shadow: 0 0 5px var(--primary-color);
 	padding: 3%;
-	border: 1px solid #616283;
+	border: 1px solid var(--primary-color);
 }
 
 .form input[type="submit"],
@@ -108,8 +113,8 @@ form {
 	-moz-box-sizing: border-box;
 	width: 100%;
 	padding: 3%;
-	background: #616283;
-	border-bottom: 2px solid #8182A3;
+	background: var(--primary-color);
+	border-bottom: 2px solid var(--secondary-color);
 	border-top-style: none;
 	border-right-style: none;
 	border-left-style: none;
@@ -119,12 +124,12 @@ form {
 
 .form input[type="submit"]:hover,
 .form input[type="button"]:hover{
-	background: #8182A3;
+	background: var(--secondary-color);
 }
 
 .label-input {
   margin-bottom: 5px;
-  border: 1px solid grey;
+  border: 1px solid var(--primary-color);
   border-radius: 5px;
   padding: 8px;
 }

@@ -29,7 +29,8 @@ class AppointmentForm extends Component {
     return (
       <div>
         <Nav />
-        <div>
+        <div className="container form">
+          <h2>New Appointment:</h2>
           <form onSubmit={this._handleSubmit}>
             <div className="label-input">
               <label htmlFor="patient">For</label>
@@ -76,8 +77,7 @@ class AppointmentForm extends Component {
             </div>
             <div className="label-input">
               <label htmlFor="notes">Notes</label>
-              <input
-                type="text-area"
+              <textarea
                 name="notes"
                 value={notes}
                 placeholder="Bring scans"
@@ -90,7 +90,7 @@ class AppointmentForm extends Component {
                 type="text"
                 name="family_member"
                 value={family_member}
-                placeholder="Brisbane"
+                placeholder="Anne"
                 onChange={this._handleInput}
               />
             </div>
