@@ -1,10 +1,39 @@
 import React, { Component } from 'react';
+import firebase from '../../Firebase';
 
 class MessageForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      message: '',
+    }
+  }
+
+  _handleInput = (e) => {
+    this.setState({
+      message: e.target.value
+    });
+  }
+
+  _handleSubmit = (e) => {
+    e.preventDefault();
+
+    this.props.sendMessage(this.state.message);
+
+    this.setState({
+      message: '',
+    });
+  }
+
   render() {
     return (
-      <form>
-        <input type="text" />
+      <form onSubmit={ this._handleSubmit }>
+        <input
+          type="text"
+          onChange={ this._handleInput }
+          placeholder="Send a message..."
+          value={ this.state.message }
+        />
         <input type="submit" value="Send" />
       </form>
     );

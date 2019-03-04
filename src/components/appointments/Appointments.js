@@ -9,60 +9,59 @@ class Appointments extends Component {
     super();
     this.state = {
       appointments: [
-        {
-          id: 1,
-          patient: 'Aileen',
-          purpose: "Doctor's appointment",
-          date: "23rd March 2019",
-          location: "Brisbane",
-          notes: '',
-          family_member: 'Anne',
-        },
-        {
-          id: 2,
-          patient: 'Aileen',
-          purpose: "Doctor's appointment",
-          date: "5th April 2019",
-          location: "Brisbane",
-          notes: '',
-          family_member: 'Donna',
-        },
-        {
-          id: 3,
-          patient: 'Aileen',
-          purpose: "Social",
-          date: "6th April 2019",
-          location: "Brisbane",
-          notes: '',
-          family_member: 'Donna',
-        },
+        // {
+        //   id: 1,
+        //   patient: 'Aileen',
+        //   purpose: "Doctor's appointment",
+        //   date: "23rd March 2019",
+        //   location: "Brisbane",
+        //   notes: '',
+        //   family_member: 'Anne',
+        // },
+        // {
+        //   id: 2,
+        //   patient: 'Aileen',
+        //   purpose: "Doctor's appointment",
+        //   date: "5th April 2019",
+        //   location: "Brisbane",
+        //   notes: '',
+        //   family_member: 'Donna',
+        // },
+        // {
+        //   id: 3,
+        //   patient: 'Aileen',
+        //   purpose: "Social",
+        //   date: "6th April 2019",
+        //   location: "Brisbane",
+        //   notes: '',
+        //   family_member: 'Donna',
+        // },
       ]
     };
   };
 
-  // componentDidMount() {
-  //   let appointments;
-  //   const appointmentsData = firebase.database().ref().child('/appointments')
-  //   appointmentsData.on('value', function(snapshot) {
-  //     appointments = snapshot.val();
-  //   });
+  componentDidMount() {
+    this.fetchAppointments();
+  }
+
+  fetchAppointments = () => {
+    const appointmentsData = firebase.database().ref().child('appointments');
+    appointmentsData.on('value', (snapshot) => {
+      this.setState({
+        appointments: snapshot.val(),
+      });
+    });
+  }
+
+  // deleteAppointment = (id) => {
+  //   const { appointments } = this.state;
+  //
+  //   const newAppointments = appointments.filter(appointment => appointment.id !== id);
   //
   //   this.setState({
-  //     appointments: [appointments],
+  //     appointments: newAppointments,
   //   });
-  //
-  //   console.log(this.state.appointments);
-  // }
-
-  deleteAppointment = (id) => {
-    const { appointments } = this.state;
-
-    const newAppointments = appointments.filter(appointment => appointment.id !== id);
-
-    this.setState({
-      appointments: newAppointments,
-    });
-  };
+  // };
 
   render() {
     const { appointments } = this.state;
@@ -77,11 +76,11 @@ class Appointments extends Component {
             </Link>
           </div>
           <h1>All Appointments</h1>
-          { appointments.map((appointment) => (
+          { Object.keys(appointments).map((key) => (
             <Appointment
-              key={ appointment.id }
-              appointment={ appointment }
-              deleteClickHandler={ this.deleteAppointment.bind(this, appointment.id) }
+              key={ key }
+              appointment={ appointments[key] }
+              // deleteClickHandler={ this.deleteAppointment.bind(this, appointment.id) }
             />
           ))}
         </div>

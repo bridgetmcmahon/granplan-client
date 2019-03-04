@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 
 class Messages extends Component {
   render() {
+    const messages = this.props.messages;
+
     return (
       <div className="messages">
-        <p>Some message</p>
-        <p>Another message</p>
+        { Object.keys(messages).map((key) => <p key={ key }>{ messages[key].message }</p>) }
       </div>
     );
   }

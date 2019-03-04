@@ -22,6 +22,7 @@ class Appointment extends Component {
   }
 
   render() {
+    console.log(this.props.appointment);
     const { purpose, patient, date, location, notes, family_member } = this.props.appointment;
     const { showAppointmentInfo } = this.state;
 
