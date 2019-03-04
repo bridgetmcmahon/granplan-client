@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from '../../Firebase';
-import { Grid, Form, Segment, Button, Header, Message } from 'semantic-ui-react';
 
 class Login extends Component {
   constructor(props) {
@@ -51,57 +50,42 @@ class Login extends Component {
 
     return (
       <div className="container">
-      <h2>Login:</h2>
-        <Grid textAlign="center" verticalAlign="middle">
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h2" icon textAlign="center">
-            </Header>
-            <Form onSubmit={ this._handleSubmit }>
-              <Segment stacked>
+        <h2>Login:</h2>
+          <form onSubmit={ this._handleSubmit } className="form">
+            <input
+              name="email"
+              placeholder="Email"
+              onChange={ this._handleChange }
+              value={ email }
+              type="email"
+            />
 
-                <Form.Input
-                  fluid
-                  name="email"
-                  icon="mail"
-                  iconPosition="left"
-                  placeholder="Email"
-                  onChange={ this._handleChange }
-                  value={ email }
-                  type="email"
-                />
+            <input
+              name="password"
+              icon="lock"
+              iconPosition="left"
+              placeholder="Password"
+              onChange={ this._handleChange }
+              value={ password }
+              type="password"
+            />
 
-                <Form.Input
-                  fluid
-                  name="password"
-                  icon="lock"
-                  iconPosition="left"
-                  placeholder="Password"
-                  onChange={ this._handleChange }
-                  value={ password }
-                  type="password"
-                />
+            <button
+              disabled={ loading }
+              className={ loading ? 'loading submit' : 'submit' }
+            >
+              Submit
+            </button>
+          </form>
 
-                <Button
-                  disabled={ loading }
-                  className={ loading? 'loading' : '' }
-                  fluid
-                  size="large"
-                >
-                  Submit
-                </Button>
-              </Segment>
-            </Form>
+          { errors.length > 0 && (
+            <p className="error">
+              <h3>Error</h3>
+              <p>{ errors }</p>
+            </p>
+          ) }
 
-            { errors.length > 0 && (
-              <Message error>
-                <h3>Error</h3>
-                <p>{ errors }</p>
-              </Message>
-            ) }
-
-            <Message>Don't have an account? <Link to="/register">Register here</Link></Message>
-          </Grid.Column>
-        </Grid>
+          <p>Don't have an account? <Link to="/register">Register here</Link></p>
       </div>
     );
   }

@@ -10,7 +10,6 @@ class Appointment extends Component {
     this._handleShowClick = this._handleShowClick.bind(this);
     this._handleDeleteClick = this._handleDeleteClick.bind(this);
   }
-  state = {};
 
   _handleShowClick = () => {
     this.setState({

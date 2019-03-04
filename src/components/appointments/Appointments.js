@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Appointment from './Appointment';
-import Nav from '../layout/Nav';
+import firebase from '../../Firebase';
 
 import { Link } from 'react-router-dom';
-import fire from '../../Firebase.js';
 
 class Appointments extends Component {
   constructor() {
@@ -40,6 +39,20 @@ class Appointments extends Component {
       ]
     };
   };
+
+  // componentDidMount() {
+  //   let appointments;
+  //   const appointmentsData = firebase.database().ref().child('/appointments')
+  //   appointmentsData.on('value', function(snapshot) {
+  //     appointments = snapshot.val();
+  //   });
+  //
+  //   this.setState({
+  //     appointments: [appointments],
+  //   });
+  //
+  //   console.log(this.state.appointments);
+  // }
 
   deleteAppointment = (id) => {
     const { appointments } = this.state;

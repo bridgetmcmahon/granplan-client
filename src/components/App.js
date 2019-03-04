@@ -8,6 +8,7 @@ import Login from './auth/Login';
 import Register from './auth/Register';
 import Appointments from './appointments/Appointments';
 import AppointmentForm from './appointments/AppointmentForm';
+import Chatroom from './chatroom/Chatroom';
 import NotFound from './pages/NotFound';
 import Footer from './layout/Footer';
 
@@ -26,16 +27,22 @@ class App extends Component {
           userLoggedIn: true,
         });
 
-        this.props.history.push('/')
+        // this.props.history.push('/')
       }
     });
+  }
+
+  logout = () => {
+    firebase.auth().signOut().then((user) => {
+      this.setState({ userLoggedIn: false })
+    })
   }
 
   render() {
     return (
       <Router>
         <div>
-          <Nav userLoggedIn={ this.state.userLoggedIn } />
+          <Nav userLoggedIn={ this.state.userLoggedIn } logout={ this.logout } />
           <div className="container">
             <Switch>
               <Route exact path="/" component={ Home } />
@@ -43,6 +50,7 @@ class App extends Component {
               <Route exact path="/register" component={ Register } />
               <Route exact path="/appointments" component={ Appointments } />
               <Route exact path="/appointments/new" component={ AppointmentForm } />
+              <Route exact path="/chatroom" component={ Chatroom } />
               <Route component={ NotFound } />
             </Switch>
           </div>

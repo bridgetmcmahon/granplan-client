@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import firebase from '../../Firebase';
+// import { Grid, Form, Segment, Button, Header, Message } from 'semantic-ui-react';
 
 class AppointmentForm extends Component {
   state = {
@@ -8,7 +10,28 @@ class AppointmentForm extends Component {
     location: '',
     notes: '',
     family_member: '',
+    errors: [],
+    appointmentsRef: firebase.database().ref('appointments'),
   };
+
+  isFormValid = () => {
+    let errors = [];
+    let error;
+
+    if (this.isFormEmpty(this.state)) {
+      error = { message: 'Fill in the required fields' };
+      this.setState({
+        errors: errors.concat(error),
+      });
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  isFormEmpty = ({ purpose, patient, date, location }) => {
+    return (!purpose.length || !patient.length || !date.length || !location.length);
+  }
 
   _handleInput = (e) => {
     this.setState({
@@ -18,8 +41,30 @@ class AppointmentForm extends Component {
 
   _handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
-    this.props.history.push('/appointments');
+
+    if (this.isFormValid()) {
+      this.setState({
+        errors: [],
+      });
+
+      const appointmentData = {
+        purpose: this.state.purpose,
+        patient: this.state.patient,
+        date: this.state.date,
+        location: this.state.location,
+        notes: this.state.notes,
+        family_member: this.state.family_member
+      };
+
+      const newAppointmentKey = this.state.appointmentsRef.push().key;
+
+      let updates = {};
+      updates['/' + newAppointmentKey] = appointmentData;
+
+      this.props.history.push('/appointments');
+
+      return this.state.appointmentsRef.update(updates);
+    }
   }
 
   render() {

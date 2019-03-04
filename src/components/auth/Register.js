@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from '../../Firebase';
-import { Grid, Form, Segment, Button, Header, Message } from 'semantic-ui-react';
 
 class Register extends Component {
   constructor(props) {
@@ -104,77 +103,55 @@ class Register extends Component {
     return (
       <div className="container">
       <h2>Register:</h2>
-        <Grid textAlign="center" verticalAlign="middle">
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h2" icon textAlign="center">
-            </Header>
-            <Form onSubmit={ this._handleSubmit }>
-              <Segment stacked>
-                <Form.Input
-                  fluid
+            <form onSubmit={ this._handleSubmit } className="form">
+                <input
                   name="username"
-                  icon="user"
-                  iconPosition="left"
                   placeholder="Username"
                   onChange={ this._handleChange }
                   value={ username }
                   type="text"
                 />
 
-                <Form.Input
-                  fluid
+                <input
                   name="email"
-                  icon="mail"
-                  iconPosition="left"
                   placeholder="Email"
                   onChange={ this._handleChange }
                   value={ email }
                   type="email"
                 />
 
-                <Form.Input
-                  fluid
+                <input
                   name="password"
-                  icon="lock"
-                  iconPosition="left"
                   placeholder="Password"
                   onChange={ this._handleChange }
                   value={ password }
                   type="password"
                 />
 
-                <Form.Input
-                  fluid
+                <input
                   name="passwordConfirmation"
-                  icon="repeat"
-                  iconPosition="left"
                   placeholder="Password Confirmation"
                   onChange={ this._handleChange }
                   value={ passwordConfirmation }
                   type="password"
                 />
 
-                <Button
+                <button
                   disabled={ loading }
-                  className={ loading? 'loading' : '' }
-                  fluid
-                  size="large"
+                  className={ loading ? 'loading' : '' }
                 >
                   Submit
-                </Button>
-              </Segment>
-            </Form>
+                </button>
+            </form>
 
             { errors.length > 0 && (
-              <Message error>
+              <p className="error">
                 <h3>Error</h3>
                 <p>{ errors }</p>
-              </Message>
+              </p>
             ) }
 
-            <Message>Already a User? <Link to="/login">Login</Link></Message>
-          </Grid.Column>
-        </Grid>
+            <p>Already a User? <Link to="/login">Login</Link></p>
       </div>
     );
   }

@@ -107,7 +107,8 @@ form {
 }
 
 .form input[type="submit"],
-.form input[type="button"]{
+.form input[type="button"],
+.form button {
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -169,6 +170,18 @@ form {
 
 .new-appointment i {
   margin-right: 20px;
+}
+
+/* ----- CHATROOM ----- */
+.chatroom {
+  background-color: #EEEEEE;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.messages * {
+  background-color: #FFFFFF;
+  border-radius: 5px;
 }
 
 /* ----- FOOTER ----- */

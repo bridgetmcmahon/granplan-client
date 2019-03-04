@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../../App.css';
 
 class Nav extends Component {
+
   render() {
     return (
         <nav className="header">
@@ -17,7 +18,10 @@ class Nav extends Component {
                 <Link to="/appointments">Appointments</Link>
               </li>
               <li>
-                <Link to="/">Chat</Link>
+                <Link to="/chatroom">Chat</Link>
+              </li>
+              <li>
+                <button onClick={ this.props.logout }>Log Out</button>
               </li>
             </ul>
           ) : (
