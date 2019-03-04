@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import firebase from '../Firebase';
 
 import Nav from './layout/Nav';
 import Home from './Home';
@@ -11,10 +12,18 @@ import NotFound from './pages/NotFound';
 import Footer from './layout/Footer';
 
 class App extends Component {
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.props.history.push('/')
+      }
+    });
+  }
+
   render() {
     return (
       <Router>
-        <div className="App">
+        <div>
           <Nav />
           <div className="container">
             <Switch>

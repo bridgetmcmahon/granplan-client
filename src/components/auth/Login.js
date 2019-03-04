@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
-import fire from '../../Firebase';
+import { Link } from 'react-router-dom';
+import firebase from '../../Firebase';
+import { Grid, Form, Segment, Button, Header, Message } from 'semantic-ui-react';
 
 class Login extends Component {
   constructor(props) {
@@ -8,9 +9,12 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      message: '',
+      errors: [],
+      loading: false,
     };
   }
+
+  isFormValid = ({ email, password }) => email && password;
 
   _handleChange = (e) => {
     this.setState({
@@ -18,44 +22,86 @@ class Login extends Component {
     });
   }
 
-  login = (e) => {
+  _handleSubmit = (e) => {
     e.preventDefault();
-    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then((u) => {
-        console.log(u)
-      }).catch((error) => {
-        this.setState({
-          message: error.message,
-        });
+
+    if (this.isFormValid(this.state)) {
+      this.setState({
+        errors: '',
+        loading: true,
       });
 
-    this.props.history.push('/appointments');
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then( (signedInUser) => {
+          console.log(signedInUser);
+        }).catch( (err) => {
+          console.error(err);
+          this.setState({
+            errors: this.state.errors.concat(err),
+            loading: false,
+          })
+        })
+    }
   }
 
   render() {
+    const { email, password, errors, loading } = this.state;
+
     return (
-      <div className="form">
-        <div className="container">
-          <h2>Log In:</h2>
-          <form onSubmit={ this.login }>
-            <p>{ this.state.message }</p>
-              <input
-                value={ this.state.email }
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={ this._handleChange }
-              />
-              <input
-                value={ this.state.password }
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={ this._handleChange }
-              />
-            <input type="submit" value="Log In" />
-          </form>
-        </div>
+      <div className="container">
+      <h2>Login:</h2>
+        <Grid textAlign="center" verticalAlign="middle">
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as="h2" icon textAlign="center">
+            </Header>
+            <Form onSubmit={ this._handleSubmit }>
+              <Segment stacked>
+
+                <Form.Input
+                  fluid
+                  name="email"
+                  icon="mail"
+                  iconPosition="left"
+                  placeholder="Email"
+                  onChange={ this._handleChange }
+                  value={ email }
+                  type="email"
+                />
+
+                <Form.Input
+                  fluid
+                  name="password"
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  onChange={ this._handleChange }
+                  value={ password }
+                  type="password"
+                />
+
+                <Button
+                  disabled={ loading }
+                  className={ loading? 'loading' : '' }
+                  fluid
+                  size="large"
+                >
+                  Submit
+                </Button>
+              </Segment>
+            </Form>
+
+            { errors.length > 0 && (
+              <Message error>
+                <h3>Error</h3>
+                <p>{ errors }</p>
+              </Message>
+            ) }
+
+            <Message>Don't have an account? <Link to="/register">Register here</Link></Message>
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }

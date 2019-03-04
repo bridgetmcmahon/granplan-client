@@ -11,8 +11,9 @@ class Register extends Component {
       email: '',
       password: '',
       passwordConfirmation: '',
-      errors: '',
+      errors: [],
       loading: false,
+      usersRef: firebase.database().ref('users'),
     };
   }
 
@@ -68,12 +69,19 @@ class Register extends Component {
           console.log(createdUser);
           createdUser.user.updateProfile({
             displayName: this.state.username,
-          });
-        })
-        .then(() => {
-          this.setState({
-            loading: false
-          });
+          })
+          .then(() => {
+            this.saveUser(createdUser).then(() => {
+              console.log('user saved');
+            })
+          })
+          .catch((err) => {
+            console.log(err);
+            this.setState({
+              errors: this.state.errors.concat(err),
+              loading: false,
+            })
+          })
         }).catch((err) => {
           console.error(err);
           this.setState({
@@ -82,6 +90,12 @@ class Register extends Component {
           });
         })
     }
+  }
+
+  saveUser = (createdUser) => {
+    return this.state.usersRef.child(createdUser.user.uid).set({
+      name: createdUser.user.displayName
+    })
   }
 
   render() {
