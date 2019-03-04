@@ -12,9 +12,20 @@ import NotFound from './pages/NotFound';
 import Footer from './layout/Footer';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userLoggedIn: false,
+    }
+  }
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        this.setState({
+          userLoggedIn: true,
+        });
+
         this.props.history.push('/')
       }
     });
@@ -24,7 +35,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav />
+          <Nav userLoggedIn={ this.state.userLoggedIn } />
           <div className="container">
             <Switch>
               <Route exact path="/" component={ Home } />
