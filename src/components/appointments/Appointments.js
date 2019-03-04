@@ -3,6 +3,7 @@ import Appointment from './Appointment';
 import Nav from '../layout/Nav';
 
 import { Link } from 'react-router-dom';
+import fire from '../../Firebase.js';
 
 class Appointments extends Component {
   constructor() {
@@ -55,16 +56,15 @@ class Appointments extends Component {
 
     return (
       <div>
-        <Nav />
         <div className="container">
           <div className="new-appointment">
-            <h2>New Appointment</h2>
             <Link to="/appointments/new">
               <i className="fas fa-plus"></i>
+              <h3>New Appointment</h3>
             </Link>
           </div>
           <h1>All Appointments</h1>
-          { appointments.map(appointment => (
+          { appointments.map((appointment) => (
             <Appointment
               key={ appointment.id }
               appointment={ appointment }

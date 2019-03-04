@@ -4,7 +4,7 @@ class Appointment extends Component {
   constructor() {
     super();
     this.state = {
-      showAppointmentInfo: true,
+      showAppointmentInfo: false,
     };
 
     this._handleShowClick = this._handleShowClick.bind(this);

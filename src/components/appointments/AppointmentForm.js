@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Nav from '../layout/Nav';
 
 class AppointmentForm extends Component {
   state = {
@@ -28,7 +27,6 @@ class AppointmentForm extends Component {
 
     return (
       <div>
-        <Nav />
         <div className="container form">
           <h2>New Appointment:</h2>
           <form onSubmit={this._handleSubmit}>

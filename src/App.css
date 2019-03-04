@@ -148,21 +148,34 @@ form {
 }
 
 .new-appointment {
-  background-color: #EEEEEE;
   padding: 10px;
   border-radius: 5px;
   margin: 10px 0;
   display: flex;
-  justify-content: space-between;
+  background-color: #9ACD32;
+  color: #FFFFFF;
 }
 
-.new-appointment h2 {
+.new-appointment h3 {
   margin: 2px;
   display: inline-block;
 }
 
-.fa-plus {
-  color: #9ACD32;
+.new-appointment a {
   align-self: center;
-  vertical-align: center;
+  color: #FFFFFF;
+  justify-content: space-between;
+}
+
+.new-appointment i {
+  margin-right: 20px;
+}
+
+/* ----- FOOTER ----- */
+footer {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 25px;
+  margin-top: 20px;
 }

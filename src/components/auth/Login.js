@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
-// import fire from '../Firebase';
-import Nav from './layout/Nav';
+import fire from '../../Firebase';
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: '',
@@ -21,15 +20,25 @@ class Login extends Component {
 
   login = (e) => {
     e.preventDefault();
+    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then((u) => {
+        console.log(u)
+      }).catch((error) => {
+        this.setState({
+          message: error.message,
+        });
+      });
+
+    this.props.history.push('/appointments');
   }
 
   render() {
     return (
       <div className="form">
-        <Nav />
         <div className="container">
           <h2>Log In:</h2>
           <form onSubmit={ this.login }>
+            <p>{ this.state.message }</p>
               <input
                 value={ this.state.email }
                 type="email"
