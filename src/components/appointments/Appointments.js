@@ -8,35 +8,7 @@ class Appointments extends Component {
   constructor() {
     super();
     this.state = {
-      appointments: [
-        // {
-        //   id: 1,
-        //   patient: 'Aileen',
-        //   purpose: "Doctor's appointment",
-        //   date: "23rd March 2019",
-        //   location: "Brisbane",
-        //   notes: '',
-        //   family_member: 'Anne',
-        // },
-        // {
-        //   id: 2,
-        //   patient: 'Aileen',
-        //   purpose: "Doctor's appointment",
-        //   date: "5th April 2019",
-        //   location: "Brisbane",
-        //   notes: '',
-        //   family_member: 'Donna',
-        // },
-        // {
-        //   id: 3,
-        //   patient: 'Aileen',
-        //   purpose: "Social",
-        //   date: "6th April 2019",
-        //   location: "Brisbane",
-        //   notes: '',
-        //   family_member: 'Donna',
-        // },
-      ]
+      appointments: [],
     };
   };
 
@@ -53,15 +25,10 @@ class Appointments extends Component {
     });
   }
 
-  // deleteAppointment = (id) => {
-  //   const { appointments } = this.state;
-  //
-  //   const newAppointments = appointments.filter(appointment => appointment.id !== id);
-  //
-  //   this.setState({
-  //     appointments: newAppointments,
-  //   });
-  // };
+  deleteAppointment = (id) => {
+    firebase.database().ref('appointments').child(id).remove();
+    this.fetchAppointments();
+  };
 
   render() {
     const { appointments } = this.state;
@@ -79,8 +46,9 @@ class Appointments extends Component {
           { Object.keys(appointments).map((key) => (
             <Appointment
               key={ key }
+              appointmentKey={ key }
               appointment={ appointments[key] }
-              // deleteClickHandler={ this.deleteAppointment.bind(this, appointment.id) }
+              deleteAppointment={ this.deleteAppointment.bind(this, key) }
             />
           ))}
         </div>

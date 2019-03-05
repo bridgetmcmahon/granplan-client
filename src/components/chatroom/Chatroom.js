@@ -13,9 +13,9 @@ class Chatroom extends Component {
   }
 
   checkForUser() {
-    firebase.auth().onAuthStateChanges((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ user })
+        this.setState({ user: user.displayName })
       } else {
         this.setState({ user: null })
       }
@@ -24,6 +24,7 @@ class Chatroom extends Component {
 
   componentDidMount() {
     this.fetchMessages();
+    this.checkForUser();
   }
 
   fetchMessages = () => {

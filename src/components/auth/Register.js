@@ -151,7 +151,7 @@ class Register extends Component {
               </p>
             ) }
 
-            <p>Already a User? <Link to="/login">Login</Link></p>
+            <p>Already a User? <Link to="/login">Login here</Link></p>
       </div>
     );
   }

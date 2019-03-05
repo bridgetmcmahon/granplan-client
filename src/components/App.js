@@ -50,6 +50,7 @@ class App extends Component {
               <Route exact path="/register" component={ Register } />
               <Route exact path="/appointments" component={ Appointments } />
               <Route exact path="/appointments/new" component={ AppointmentForm } />
+              <Route path="/appointments/:id" component={ AppointmentForm } />
               <Route exact path="/chatroom" component={ Chatroom } />
               <Route component={ NotFound } />
             </Switch>

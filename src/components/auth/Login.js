@@ -62,8 +62,6 @@ class Login extends Component {
 
             <input
               name="password"
-              icon="lock"
-              iconPosition="left"
               placeholder="Password"
               onChange={ this._handleChange }
               value={ password }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import firebase from '../../Firebase';
 
 class MessageForm extends Component {
   constructor() {
@@ -27,7 +26,7 @@ class MessageForm extends Component {
 
   render() {
     return (
-      <form onSubmit={ this._handleSubmit }>
+      <form onSubmit={ this._handleSubmit } className="form">
         <input
           type="text"
           onChange={ this._handleInput }

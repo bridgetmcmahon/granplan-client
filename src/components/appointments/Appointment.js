@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Appointment extends Component {
   constructor() {
@@ -18,11 +19,10 @@ class Appointment extends Component {
   }
 
   _handleDeleteClick = () => {
-    this.props.deleteClickHandler();
+    this.props.deleteAppointment();
   }
 
   render() {
-    console.log(this.props.appointment);
     const { purpose, patient, date, location, notes, family_member } = this.props.appointment;
     const { showAppointmentInfo } = this.state;
 
@@ -30,7 +30,13 @@ class Appointment extends Component {
       <div className="appointment-card">
         <span><h3 style={{ display: 'inline' }}>{ purpose }</h3>
         <i onClick={ this._handleShowClick } className="fas fa-sort-down" /></span>
-        <i className="fas fa-times" onClick={ this._handleDeleteClick } style={{ cursor: 'pointer', color: 'red', marginLeft: '20px' }}/>
+        <Link to={"/appointments/" + this.props.appointmentKey}>
+          <i className="fas fa-pen" />
+        </Link>
+        <i
+          className="fas fa-times"
+          onClick={ this._handleDeleteClick }
+          style={{ cursor: 'pointer', color: 'red', marginLeft: '20px' }}/>
         { showAppointmentInfo ? (
           <div>
           <p>For: { patient }</p>
