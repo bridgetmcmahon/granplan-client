@@ -23,7 +23,7 @@ class Appointments extends Component {
   }
 
   fetchAppointments = () => {
-    const appointmentsData = firebase.database().ref().child('appointments');
+    const appointmentsData = firebase.database().ref().child('appointments').orderByChild('date');
     appointmentsData.on('value', (snapshot) => {
       this.setState({
         appointments: snapshot.val(),

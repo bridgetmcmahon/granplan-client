@@ -26,7 +26,7 @@ class MessageForm extends Component {
 
   render() {
     return (
-      <form onSubmit={ this._handleSubmit } className="form">
+      <form onSubmit={ this._handleSubmit } className=" message-form">
         <input
           type="text"
           onChange={ this._handleInput }

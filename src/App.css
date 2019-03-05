@@ -16,6 +16,7 @@ body {
 
 h1, h2, h3 {
   font-family: var(--heading-font);
+  margin: 10px 0;
 }
 
 /* ----- LAYOUT -----  */
@@ -82,7 +83,7 @@ h1, h2, h3 {
 
 /* ----- FORMS ----- */
 
-form {
+.form {
 	max-width: 400px;
 	margin: 10px auto;
 	padding: 16px;
@@ -94,7 +95,6 @@ form {
 .form input[type="date"],
 .form input[type="email"],
 .form input[type="password"],
-.form input[type="search"],
 .form input[type="time"],
 .form textarea,
 .form select
@@ -120,8 +120,6 @@ form {
 .form input[type="text"]:focus,
 .form input[type="date"]:focus,
 .form input[type="email"]:focus,
-.form input[type="number"]:focus,
-.form input[type="search"]:focus,
 .form input[type="time"]:focus,
 .form textarea:focus,
 .form select:focus
@@ -145,23 +143,13 @@ form {
 	border-right-style: none;
 	border-left-style: none;
 	color: #fff;
+  font-size: 90%;
   border-radius: 5px;
 }
 
 .form input[type="submit"]:hover,
 .form input[type="button"]:hover{
 	background: var(--secondary-color);
-}
-
-.label-input {
-  margin-bottom: 5px;
-  border: 1px solid var(--primary-color);
-  border-radius: 5px;
-  padding: 8px;
-}
-
-.label-input input {
-  margin-left: 10px;
 }
 
 /* ----- APPOINTMENTS ----- */
@@ -276,6 +264,61 @@ form {
   padding: 3px;
 }
 
+.message {
+  margin: 8px 2px;
+}
+
+.message p {
+  margin: 0;
+  padding: 2px;
+}
+
+.sender-text {
+  color: #CCCCCC;
+  font-size: 75%;
+}
+
+.message-form {
+  background: none;
+  max-width: 100%;
+  height: auto;
+}
+
+.message-form input {
+  -webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+	outline: none;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 100%;
+	background: #fff;
+	margin-bottom: 4%;
+	border: 1px solid #ccc;
+	padding: 3%;
+	color: #555;
+	font: 95% Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+}
+
+.message-form input[type="submit"] {
+  box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 100%;
+	padding: 3%;
+	background: var(--primary-color);
+	border-bottom: 2px solid var(--secondary-color);
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;
+	color: #fff;
+  border-radius: 5px;
+}
+
+
 /* ----- FOOTER ----- */
 footer {
   background-color: var(--primary-color);
@@ -302,6 +345,47 @@ footer {
     margin: 0 auto;
     color: #ffffff;
     line-height: 35px;
+  }
+
+  .message-form {
+    display: flex;
+  }
+
+  .message-form input[type="submit"] {
+  	box-sizing: border-box;
+  	-webkit-box-sizing: border-box;
+  	-moz-box-sizing: border-box;
+  	width: 20%;
+    display: inline-block;
+  	padding: 10px;
+    justify-content: flex-end;
+  	background: var(--primary-color);
+  	border-bottom: 2px solid var(--secondary-color);
+  	border-top-style: none;
+  	border-right-style: none;
+  	border-left-style: none;
+    margin-top: 5px;
+  	color: #fff;
+    border-radius: 5px;
+  }
+
+  .message-form input[type="text"] {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 80%;
+    margin-top: 5px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #555;
+    font: 95% Arial, Helvetica, sans-serif;
+    border-radius: 5px;
   }
 }
 

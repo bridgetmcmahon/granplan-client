@@ -6,7 +6,12 @@ class Messages extends Component {
 
     return (
       <div className="messages">
-        { Object.keys(messages).map((key) => <p key={ key }>{ messages[key].sender }: { messages[key].message }</p>) }
+        { Object.keys(messages).map((key) => (
+          <div className="message">
+            <p className="sender-text">{ messages[key].sender }</p>
+            <p key={ key }>{ messages[key].message }</p>
+          </div> )
+        ) }
       </div>
     );
   }

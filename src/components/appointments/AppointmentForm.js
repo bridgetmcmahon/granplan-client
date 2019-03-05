@@ -84,6 +84,7 @@ class AppointmentForm extends Component {
 
   fetchAppointment = (id) => {
     const appointmentData = firebase.database().ref().child('appointments').child(id);
+
     appointmentData.once('value', (snapshot) => {
       this.setState({
         date: snapshot.val().date,
@@ -114,7 +115,6 @@ class AppointmentForm extends Component {
             <h2>New Appointment:</h2>
           ) }
           <form onSubmit={ this._handleSubmit }>
-            <div className="label-input">
               <label htmlFor="patient">For</label>
               <input
                 type="text"
@@ -124,8 +124,6 @@ class AppointmentForm extends Component {
                 required
                 onChange={this._handleInput}
               />
-            </div>
-            <div className="label-input">
               <label htmlFor="name">Purpose</label>
               <input
                 type="text"
@@ -135,8 +133,6 @@ class AppointmentForm extends Component {
                 required
                 onChange={ this._handleInput }
               />
-            </div>
-            <div className="label-input">
               <label htmlFor="date">Date</label>
               <input
                 type="date"
@@ -145,8 +141,6 @@ class AppointmentForm extends Component {
                 onChange={ this._handleInput }
                 required
               />
-            </div>
-            <div className="label-input">
               <label htmlFor="location">Location</label>
               <input
                 type="text"
@@ -156,8 +150,6 @@ class AppointmentForm extends Component {
                 onChange={ this._handleInput }
                 required
               />
-            </div>
-            <div className="label-input">
               <label htmlFor="notes">Notes</label>
               <textarea
                 name="notes"
@@ -165,8 +157,6 @@ class AppointmentForm extends Component {
                 placeholder="Bring scans"
                 onChange={ this._handleInput }
               />
-            </div>
-            <div className="label-input">
               <label htmlFor="family_member">Family Member</label>
               <input
                 type="text"
@@ -175,7 +165,6 @@ class AppointmentForm extends Component {
                 placeholder="Anne"
                 onChange={ this._handleInput }
               />
-            </div>
             <input type="submit" value={ this.props.match.params.id ? "Edit Appointment" : "Add Appointment" } />
           </form>
         </div>
