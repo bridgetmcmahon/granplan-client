@@ -42,6 +42,7 @@ class Login extends Component {
             loading: false,
           })
         })
+      this.props.history.push('/appointments');
     }
   }
 
@@ -49,7 +50,7 @@ class Login extends Component {
     const { email, password, errors, loading } = this.state;
 
     return (
-      <div className="container">
+      <div className="small-container">
         <h2>Login:</h2>
           <form onSubmit={ this._handleSubmit } className="form">
             <input

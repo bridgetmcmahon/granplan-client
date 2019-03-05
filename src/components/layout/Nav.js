@@ -20,7 +20,7 @@ class Nav extends Component {
                 <Link to="/chatroom">Chat</Link>
               </li>
               <li>
-                <button onClick={ this.props.logout }>Log Out</button>
+                <button className="logout" onClick={ this.props.logout }>Log Out</button>
               </li>
             </ul>
           ) : (

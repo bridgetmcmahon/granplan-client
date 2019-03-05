@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 :root {
   --primary-color: #202C59;
   --secondary-color: #8182A3;
+  --heading-font: 'Roboto';
 }
 
 body {
@@ -11,8 +14,18 @@ body {
   box-sizing: border-box;
 }
 
+h1, h2, h3 {
+  font-family: var(--heading-font);
+}
+
 /* ----- LAYOUT -----  */
 .container {
+  max-width: 360px;
+  margin: 0 auto;
+  min-height: calc(100vh - 105px);
+}
+
+.small-container {
   max-width: 360px;
   margin: 0 auto;
   min-height: calc(100vh - 105px);
@@ -21,6 +34,7 @@ body {
 .header {
   background-color: var(--primary-color);
 }
+
 
 /* ----- NAVBAR ----- */
 
@@ -54,6 +68,18 @@ body {
   border-bottom: 1px solid white;
 }
 
+.logout {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+}
+
+.logout:hover {
+  border-bottom: 1px solid #FFFFFF;
+}
+
 /* ----- FORMS ----- */
 
 form {
@@ -66,7 +92,6 @@ form {
 
 .form input[type="text"],
 .form input[type="date"],
-.form input[type="datetime"],
 .form input[type="email"],
 .form input[type="password"],
 .form input[type="search"],
@@ -94,7 +119,6 @@ form {
 
 .form input[type="text"]:focus,
 .form input[type="date"]:focus,
-.form input[type="datetime"]:focus,
 .form input[type="email"]:focus,
 .form input[type="number"]:focus,
 .form input[type="search"]:focus,
@@ -143,11 +167,12 @@ form {
 /* ----- APPOINTMENTS ----- */
 
 .appointment-card {
-  background-color: #B0E0E6;
+  background-color: #EFEFEF;
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 10px;
   height: auto;
+  box-shadow: 1px 1px 5px 1px #CCCCCC;
 }
 
 .new-appointment {
@@ -184,11 +209,13 @@ form {
   display: inline;
   margin: 0;
   text-transform: uppercase;
+  color: var(--primary-color);
 }
 
 .appointment-header p {
-  margin: 0;
+  margin: 0 10px;
   color: var(--secondary-color);
+  display: inline-block;
 }
 
 .appointment-info p {
@@ -198,12 +225,28 @@ form {
   color: var(--primary-color);
 }
 
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+
 .edit-link i {
   background-color: var(--primary-color);
   color: #FFFFFF;
   border-radius: 50%;
-  padding: 10px;
-  margin-bottom: 5px;
+  padding: 12px;
+  margin: 0 10px 5px 0;
+  display: flex;
+  align-self: flex-end;
+}
+
+.nominate-button {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 100%;
+  margin-right: 10px;
 }
 
 /* ----- CHATROOM ----- */

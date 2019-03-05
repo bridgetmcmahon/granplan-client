@@ -36,6 +36,8 @@ class App extends Component {
     firebase.auth().signOut().then((user) => {
       this.setState({ userLoggedIn: false })
     })
+
+    this.props.history.push('/');
   }
 
   render() {

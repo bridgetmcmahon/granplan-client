@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import Emoji from 'a11y-react-emoji';
+
 class Appointment extends Component {
   constructor() {
     super();
@@ -32,8 +34,8 @@ class Appointment extends Component {
           <span>
             <h3>{ purpose }</h3>
             <p>{ date }</p>
+            <i onClick={ this._handleShowClick } className="fas fa-sort-down" />
           </span>
-          <i onClick={ this._handleShowClick } className="fas fa-sort-down" />
 
           <i
             className="fas fa-times"
@@ -43,13 +45,17 @@ class Appointment extends Component {
 
         { showAppointmentInfo ? (
           <div className="appointment-info">
-          <p>For: { patient }</p>
-          <p>Location: { location }</p>
-          <p>Notes: { notes }</p>
-          <p>Family Member: { family_member }</p>
-          <Link className="edit-link" to={"/appointments/" + this.props.appointmentKey}>
-            <i className="fas fa-pen" />
-          </Link>
+            <p>For: { patient }</p>
+            <p>Location: { location }</p>
+            <p>Notes: { notes }</p>
+            <p>Family Member: { family_member }</p>
+
+            <span className="controls">
+              <button className="nominate-button"><Emoji symbol="🙋🏻" label="hand" />I'll take { patient } to this one!</button>
+              <Link className="edit-link" to={"/appointments/" + this.props.appointmentKey}>
+                <i className="fas fa-pen" />
+              </Link>
+            </span>
           </div>
         ) : null}
       </div>

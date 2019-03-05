@@ -101,7 +101,7 @@ class Register extends Component {
     const { username, email, password, passwordConfirmation, errors, loading } = this.state;
 
     return (
-      <div className="container">
+      <div className="small-container">
       <h2>Register:</h2>
             <form onSubmit={ this._handleSubmit } className="form">
                 <input

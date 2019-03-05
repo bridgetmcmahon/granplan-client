@@ -10,6 +10,12 @@ class Appointments extends Component {
     this.state = {
       appointments: [],
     };
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        this.props.history.push('/login');
+      }
+    })
   };
 
   componentDidMount() {
