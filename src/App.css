@@ -208,14 +208,19 @@ form {
 .appointment-header h3 {
   display: inline;
   margin: 0;
-  text-transform: uppercase;
+  margin-left: 10px;
   color: var(--primary-color);
 }
 
 .appointment-header p {
   margin: 0 10px;
+  margin-left: 28px;
   color: var(--secondary-color);
   display: inline-block;
+}
+
+.appointment-header i {
+  margin-right: 10px;
 }
 
 .appointment-info p {
@@ -247,6 +252,15 @@ form {
   padding: 5px 10px;
   font-size: 100%;
   margin-right: 10px;
+}
+
+.disabled {
+  background-color: #AAAAAA;
+  text-decoration: line-through;
+}
+
+.warn {
+  background-color: #FFEFD5;
 }
 
 /* ----- CHATROOM ----- */

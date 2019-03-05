@@ -36,6 +36,17 @@ class Appointments extends Component {
     this.fetchAppointments();
   };
 
+  nominateFamilyMember = (id, user) => {
+    const appointmentData = {
+      family_member: user,
+    }
+
+    let updates = {}
+    updates['/' + id] = appointmentData;
+
+    firebase.database().ref('appointments').update(updates);
+  }
+
   render() {
     const { appointments } = this.state;
 
