@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from '../../Firebase';
-// import { Grid, Form, Segment, Button, Header, Message } from 'semantic-ui-react';
 
 class AppointmentForm extends Component {
   state = {

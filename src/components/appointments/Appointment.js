@@ -28,22 +28,28 @@ class Appointment extends Component {
 
     return (
       <div className="appointment-card">
-        <span><h3 style={{ display: 'inline' }}>{ purpose }</h3>
-        <i onClick={ this._handleShowClick } className="fas fa-sort-down" /></span>
-        <Link to={"/appointments/" + this.props.appointmentKey}>
-          <i className="fas fa-pen" />
-        </Link>
-        <i
-          className="fas fa-times"
-          onClick={ this._handleDeleteClick }
-          style={{ cursor: 'pointer', color: 'red', marginLeft: '20px' }}/>
+        <div className="appointment-header">
+          <span>
+            <h3>{ purpose }</h3>
+            <p>{ date }</p>
+          </span>
+          <i onClick={ this._handleShowClick } className="fas fa-sort-down" />
+
+          <i
+            className="fas fa-times"
+            onClick={ this._handleDeleteClick }
+            style={{ cursor: 'pointer', color: 'red', marginLeft: '20px' }}/>
+        </div>
+
         { showAppointmentInfo ? (
-          <div>
+          <div className="appointment-info">
           <p>For: { patient }</p>
-          <p>Date: { date }</p>
           <p>Location: { location }</p>
           <p>Notes: { notes }</p>
           <p>Family Member: { family_member }</p>
+          <Link className="edit-link" to={"/appointments/" + this.props.appointmentKey}>
+            <i className="fas fa-pen" />
+          </Link>
           </div>
         ) : null}
       </div>
