@@ -3,14 +3,11 @@ import { Link } from 'react-router-dom';
 import firebase from '../../Firebase';
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      errors: [],
-      loading: false,
-    };
+  state = {
+    email: '',
+    password: '',
+    errors: [],
+    loading: false,
   }
 
   isFormValid = ({ email, password }) => email && password;

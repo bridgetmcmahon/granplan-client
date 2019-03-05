@@ -5,8 +5,8 @@ import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
 
 class Appointments extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       appointments: [],
     };
@@ -23,12 +23,24 @@ class Appointments extends Component {
   }
 
   fetchAppointments = () => {
-    const appointmentsData = firebase.database().ref().child('appointments').orderByChild('date');
+    const appointmentsData = firebase.database().ref('appointments').orderByChild('date');
+
     appointmentsData.on('value', (snapshot) => {
       this.setState({
         appointments: snapshot.val(),
       });
     });
+  }
+
+  orderAppointments = () => {
+    const appointments = [this.state.appointments];
+
+    appointments.sort((a, b) => {
+      return (new Date(a.date) - (new Date(b.date)));
+    });
+
+    console.log(appointments);
+    // doesn't work yet
   }
 
   deleteAppointment = (id) => {
@@ -42,7 +54,7 @@ class Appointments extends Component {
     }
 
     let updates = {}
-    updates['/' + id] = appointmentData;
+    updates[`/${ id }`] = appointmentData;
 
     firebase.database().ref('appointments').update(updates);
   }

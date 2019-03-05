@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 
 class MessageForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      message: '',
-    }
+  state = {
+    message: '',
   }
 
   _handleInput = (e) => {

@@ -4,12 +4,9 @@ import MessageForm from './MessageForm';
 import firebase from '../../Firebase';
 
 class Chatroom extends Component {
-  constructor() {
-    super();
-    this.state = {
-      messages: [],
-      user: null,
-    }
+  state = {
+    messages: [],
+    user: null,
   }
 
   checkForUser() {

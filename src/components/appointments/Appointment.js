@@ -5,11 +5,8 @@ import firebase from '../../Firebase';
 import Emoji from 'a11y-react-emoji';
 
 class Appointment extends Component {
-  constructor() {
-    super();
-    this.state = {
-      showAppointmentInfo: false,
-    };
+  state = {
+    showAppointmentInfo: false,
   }
 
   _handleShowClick = () => {
@@ -37,7 +34,7 @@ class Appointment extends Component {
         }
 
         let updates = {}
-        updates['/' + this.props.appointmentKey] = appointmentData;
+        updates[`/${this.props.appointmentKey}`] = appointmentData;
 
         firebase.database().ref('appointments').update(updates);
       }
@@ -76,18 +73,18 @@ class Appointment extends Component {
                   disabled
                   className="nominate-button disabled"
                 >
-                  <Emoji symbol="✋🏻" label="hand" />I'll take { patient } to this one!
+                  <Emoji symbol="✋🏻" label="hand" />{`I'll take ${ patient } to this one!`}
                 </button>
               ) : (
                 <button
                   className="nominate-button"
                   onClick={ this.nominateFamilyMember }
                 >
-                  <Emoji symbol="✋🏻" label="hand" />I'll take { patient } to this one!
+                  <Emoji symbol="✋🏻" label="hand" />{`I'll take ${ patient } to this one!`}
                 </button>
               ) }
 
-              <Link className="edit-link" to={"/appointments/" + this.props.appointmentKey}>
+              <Link className="edit-link" to={`/appointments/${ this.props.appointmentKey }`}>
                 <i className="fas fa-pen" />
               </Link>
             </span>

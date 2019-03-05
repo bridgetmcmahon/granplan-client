@@ -8,6 +8,12 @@ This app was built to help families create rosters for taking care of elderly fa
 - React
 - Firebase
 
+## To do
+- Create user groups
+- Throttle chatroom messages
+- Warning before deleting appointments
+- Order appointments by date
+
 ## Available Scripts
 
 In the project directory, you can run:
