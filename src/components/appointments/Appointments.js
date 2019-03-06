@@ -9,6 +9,7 @@ class Appointments extends Component {
     super(props);
     this.state = {
       appointments: [],
+      searchTerm: '',
     };
 
     firebase.auth().onAuthStateChanged((user) => {
@@ -18,13 +19,24 @@ class Appointments extends Component {
     })
   };
 
+  _handleInput = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
   componentDidMount() {
     this.fetchAppointments();
-    this.orderAppointments();
   }
 
   fetchAppointments = () => {
-    const appointmentsData = firebase.database().ref('appointments').orderByChild('date');
+    let appointmentsData;
+
+    if (this.state.searchTerm === '') {
+      appointmentsData = firebase.database().ref('appointments').orderByChild('date');
+    } else {
+      appointmentsData = firebase.database().ref('appointments').orderByChild('patient').equalTo(this.state.searchTerm)
+    }
 
     appointmentsData.on('value', (snapshot) => {
       let snap = snapshot.val();
@@ -61,6 +73,11 @@ class Appointments extends Component {
     firebase.database().ref('appointments').update(updates);
   }
 
+  filterAppointments = (e) => {
+    e.preventDefault();
+    this.fetchAppointments();
+  }
+
   render() {
     const { appointments } = this.state;
 
@@ -74,6 +91,16 @@ class Appointments extends Component {
             </Link>
           </div>
           <h1>All Appointments</h1>
+          <form onSubmit={ this.filterAppointments }>
+            <label htmlFor="searchTerm">Search Appointments:</label>
+            <input
+              type="search"
+              name="searchTerm"
+              placeholder="Search by patient..."
+              onChange={ this._handleInput }
+            />
+            <input type="submit" value="Search" />
+          </form>
           { Object.keys(appointments).map((key) => (
             <Appointment
               key={ key }

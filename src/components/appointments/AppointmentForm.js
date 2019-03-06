@@ -6,6 +6,7 @@ class AppointmentForm extends Component {
     purpose: '',
     patient: '',
     date: '',
+    time: '',
     location: '',
     notes: '',
     family_member: '',
@@ -13,6 +14,7 @@ class AppointmentForm extends Component {
     appointmentsRef: firebase.database().ref('appointments'),
   };
 
+  // Form validations
   isFormValid = () => {
     let errors = [];
     let error;
@@ -32,6 +34,7 @@ class AppointmentForm extends Component {
     return (!purpose.length || !patient.length || !date.length || !location.length);
   }
 
+  // Event listeners
   _handleInput = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -104,7 +107,7 @@ class AppointmentForm extends Component {
   }
 
   render() {
-    const { purpose, patient, date, location, notes, family_member } = this.state;
+    const { purpose, patient, date, time, location, notes, family_member } = this.state;
 
     return (
       <div>
@@ -138,6 +141,13 @@ class AppointmentForm extends Component {
                 type="date"
                 name="date"
                 value={ date }
+                onChange={ this._handleInput }
+                required
+              />
+              <input
+                type="time"
+                name="time"
+                value={ time }
                 onChange={ this._handleInput }
                 required
               />
