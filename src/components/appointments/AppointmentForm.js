@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import firebase from '../../Firebase';
 
 class AppointmentForm extends Component {
-  state = {
-    purpose: '',
-    patient: '',
-    date: '',
-    time: '',
-    location: '',
-    notes: '',
-    familyMember: '',
-    errors: [],
-    appointmentsRef: firebase.database().ref('appointments'),
-    currentUser: null,
+  constructor(props) {
+    super(props);
+    this.state = {
+      purpose: '',
+      patient: '',
+      date: '',
+      time: '',
+      location: '',
+      notes: '',
+      familyMember: '',
+      errors: [],
+      appointmentsRef: firebase.database().ref('appointments'),
+      currentUser: null,
+      editMode: false,
+    }
   };
 
   // Form validations
@@ -60,7 +64,7 @@ class AppointmentForm extends Component {
         familyMember: this.state.familyMember
       };
 
-      if (this.props.match.params.id) {
+      if (this.state.editMode) {
         this.editAppointment(appointmentData);
       } else {
         this.addNewAppointment(appointmentData);
@@ -80,7 +84,7 @@ class AppointmentForm extends Component {
   }
 
   editAppointment(appointmentData) {
-    const appointmentKey = this.props.match.params.id;
+    const appointmentKey = this.state.editMode;
     let updates = {}
     updates[`/${appointmentKey}`] = appointmentData;
 
@@ -102,8 +106,14 @@ class AppointmentForm extends Component {
     });
   }
 
-  componentDidMount() {
+  componentWillMount() {
     if (this.props.match.params.id) {
+      this.setState({ editMode: true })
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.editMode) {
       this.fetchAppointment(this.props.match.params.id);
     };
     this.fetchCurrentUser();
@@ -118,12 +128,12 @@ class AppointmentForm extends Component {
   }
 
   render() {
-    const { purpose, patient, date, time, location, notes, currentUser } = this.state;
+    const { purpose, patient, date, time, location, notes, familyMember, currentUser } = this.state;
 
     return (
       <div>
         <div className="container form">
-          { this.props.match.params.id ? (
+          { this.state.editMode ? (
             <h2>Edit Appointment:</h2>
           ) : (
             <h2>New Appointment:</h2>
@@ -138,6 +148,7 @@ class AppointmentForm extends Component {
                 required
                 onChange={this._handleInput}
               />
+
               <label htmlFor="name">Purpose</label>
               <input
                 type="text"
@@ -147,6 +158,7 @@ class AppointmentForm extends Component {
                 required
                 onChange={ this._handleInput }
               />
+
               <label htmlFor="date">Date</label>
               <input
                 type="date"
@@ -155,6 +167,7 @@ class AppointmentForm extends Component {
                 onChange={ this._handleInput }
                 required
               />
+
               <label htmlFor="time">Time</label>
               <input
                 type="time"
@@ -163,6 +176,7 @@ class AppointmentForm extends Component {
                 onChange={ this._handleInput }
                 required
               />
+
               <label htmlFor="location">Location</label>
               <input
                 type="text"
@@ -172,6 +186,7 @@ class AppointmentForm extends Component {
                 onChange={ this._handleInput }
                 required
               />
+
               <label htmlFor="notes">Notes</label>
               <textarea
                 name="notes"
@@ -179,11 +194,19 @@ class AppointmentForm extends Component {
                 placeholder="Bring scans"
                 onChange={ this._handleInput }
               />
-              <label htmlFor="familyMember">{`I'll take ${ patient || 'them' } to this appointment`}</label>
+
+              { this.state.familyMember ? (
+                <div>
+                  <p>{ `${ familyMember === currentUser ? 'You are' : `${ familyMember } is` } taking ${ patient } to this appointment`}</p>
+                </div>
+              ) : null }
+
+              <span style={ this.state.editMode && this.state.familyMember ? { display: 'none' } : { display: "block" } }>
+              <label style={{ display: 'block' }} htmlFor="familyMember">{`I can take ${ patient || 'them' } to this appointment`}</label>
               <input
                 type="radio"
                 name="familyMember"
-                value={ currentUser }
+                value={ currentUser || "" }
                 onChange={ this._handleInput }
               />Yes
               <input
@@ -192,8 +215,8 @@ class AppointmentForm extends Component {
                 value=""
                 onChange={ this._handleInput }
               />No
-
-            <input type="submit" value={ this.props.match.params.id ? "Edit Appointment" : "Add Appointment" } />
+              </span>
+            <input type="submit" value={ this.state.editMode ? "Edit Appointment" : "Add Appointment" } />
           </form>
         </div>
       </div>
