@@ -118,7 +118,7 @@ class AppointmentForm extends Component {
   }
 
   render() {
-    const { purpose, patient, date, time, location, notes, familyMember, currentUser } = this.state;
+    const { purpose, patient, date, time, location, notes, currentUser } = this.state;
 
     return (
       <div>

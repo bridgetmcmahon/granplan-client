@@ -296,6 +296,10 @@ h1 {
   margin: 8px 2px;
 }
 
+.user-message, .user-message p {
+  background-color: #F0FFF0;
+}
+
 .message p {
   margin: 0;
   padding: 2px;

@@ -8,6 +8,7 @@ class Nav extends Component {
     return (
         <nav className="header">
           <div className="nav-bar">
+
           { this.props.userLoggedIn ? (
             <ul>
               <li>

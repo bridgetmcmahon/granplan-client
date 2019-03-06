@@ -102,14 +102,14 @@ class Appointments extends Component {
             />
             <input type="submit" value="Search" />
           </form>
-          { Object.keys(appointments).map((key) => (
+          { appointments ? ( Object.keys(appointments).map((key) => (
             <Appointment
               key={ key }
               appointmentKey={ key }
               appointment={ appointments[key] }
               deleteAppointment={ this.deleteAppointment.bind(this, key) }
             />
-          ))}
+          )) ) : (<p>No current appointments</p>)}
         </div>
       </div>
     );

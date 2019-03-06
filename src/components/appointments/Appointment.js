@@ -20,7 +20,7 @@ class Appointment extends Component {
   _handleDeleteClick = () => {
     confirmAlert({
       title: 'Confirm to delete',
-      message: "Are you sure you want to delete this appointment? This action can't be undone",
+      message: "Are you sure you want to delete this appointment? This action can't be undone.",
       buttons: [
         {
           label: 'Yes',
@@ -57,7 +57,7 @@ class Appointment extends Component {
   }
 
   render() {
-    const { purpose, patient, date, location, notes, familyMember } = this.props.appointment;
+    const { purpose, patient, date, location, time, notes, familyMember } = this.props.appointment;
     const { showAppointmentInfo } = this.state;
 
     return (
@@ -75,11 +75,12 @@ class Appointment extends Component {
             style={{ cursor: 'pointer', color: '#F08080', marginLeft: '20px' }}/>
         </div>
 
-        { showAppointmentInfo ? (
+        { showAppointmentInfo && (
           <div className="appointment-info">
             <p><strong>For</strong>: { patient }</p>
             <p><strong>Location</strong>: { location }</p>
-            <p><strong>Notes</strong>: { notes }</p>
+            <p><strong>Time</strong>: { time }</p>
+            <p><strong>Notes</strong>: { notes || '-' }</p>
             <p><strong>Family Member</strong>: { familyMember }</p>
 
             <span className="controls">
@@ -104,7 +105,7 @@ class Appointment extends Component {
               </Link>
             </span>
           </div>
-        ) : null}
+        ) }
       </div>
     );
   }
