@@ -20,27 +20,29 @@ class Appointments extends Component {
 
   componentDidMount() {
     this.fetchAppointments();
+    this.orderAppointments();
   }
 
   fetchAppointments = () => {
     const appointmentsData = firebase.database().ref('appointments').orderByChild('date');
 
     appointmentsData.on('value', (snapshot) => {
+      let snap = snapshot.val();
+      let appointmentsArray = Object.keys(snap).map((key) => {
+        return snap[key];
+      });
+
+      // Order by date
+      appointmentsArray.sort((a, b) => {
+        a = new Date(a.date);
+        b = new Date(b.date);
+        return a < b ? -1 : a > b ? 1 : 0;
+      });
+
       this.setState({
-        appointments: snapshot.val(),
+        appointments: appointmentsArray,
       });
     });
-  }
-
-  orderAppointments = () => {
-    const appointments = [this.state.appointments];
-
-    appointments.sort((a, b) => {
-      return (new Date(a.date) - (new Date(b.date)));
-    });
-
-    console.log(appointments);
-    // doesn't work yet
   }
 
   deleteAppointment = (id) => {
