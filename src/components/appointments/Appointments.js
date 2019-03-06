@@ -32,6 +32,7 @@ class Appointments extends Component {
   fetchAppointments = () => {
     let appointmentsData;
 
+    // Filter data
     if (this.state.searchTerm === '') {
       appointmentsData = firebase.database().ref('appointments').orderByChild('date');
     } else {
@@ -39,20 +40,21 @@ class Appointments extends Component {
     }
 
     appointmentsData.on('value', (snapshot) => {
-      let snap = snapshot.val();
-      let appointmentsArray = Object.keys(snap).map((key) => {
-        return snap[key];
-      });
-
-      // Order by date
-      appointmentsArray.sort((a, b) => {
-        a = new Date(a.date);
-        b = new Date(b.date);
-        return a < b ? -1 : a > b ? 1 : 0;
-      });
-
+    //   let snap = snapshot.val();
+    //   console.log(snap);
+    //   let appointmentsArray = Object.keys(snap).map((key) => {
+    //     return snap[key];
+    //   });
+    //
+    //   // Order by date
+    //   appointmentsArray.sort((a, b) => {
+    //     a = new Date(a.date);
+    //     b = new Date(b.date);
+    //     return a < b ? -1 : a > b ? 1 : 0;
+    //   });
+    //
       this.setState({
-        appointments: appointmentsArray,
+        appointments: snapshot.val(),
       });
     });
   }
@@ -64,7 +66,7 @@ class Appointments extends Component {
 
   nominateFamilyMember = (id, user) => {
     const appointmentData = {
-      family_member: user,
+      familyMember: user,
     }
 
     let updates = {}
@@ -90,9 +92,8 @@ class Appointments extends Component {
               <h3>New Appointment</h3>
             </Link>
           </div>
-          <h1>All Appointments</h1>
-          <form onSubmit={ this.filterAppointments }>
-            <label htmlFor="searchTerm">Search Appointments:</label>
+          <h1>Upcoming Appointments</h1>
+          <form onSubmit={ this.filterAppointments } className="form search">
             <input
               type="search"
               name="searchTerm"

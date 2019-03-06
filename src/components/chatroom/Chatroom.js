@@ -26,7 +26,10 @@ class Chatroom extends Component {
   }
 
   fetchMessages = () => {
-    const messagesData = firebase.database().ref().child('messages');
+    let loadNumber = 20
+    // TO DO = LOAD EARLIER MESSAGES FUNCTION
+
+    const messagesData = firebase.database().ref().child('messages').limitToLast(loadNumber);
     messagesData.on('value', (snapshot) => {
       this.setState({
         messages: snapshot.val(),

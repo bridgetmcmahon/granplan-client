@@ -19,6 +19,10 @@ h1, h2, h3 {
   margin: 12px 0;
 }
 
+h1 {
+  color: var(--primary-color);
+}
+
 /* ----- LAYOUT -----  */
 .container {
   max-width: 360px;
@@ -96,6 +100,8 @@ h1, h2, h3 {
 .form input[type="email"],
 .form input[type="password"],
 .form input[type="time"],
+.form input[type="search"],
+.form input[tyle="radio"],
 .form textarea,
 .form select
 {
@@ -121,6 +127,7 @@ h1, h2, h3 {
 .form input[type="date"]:focus,
 .form input[type="email"]:focus,
 .form input[type="time"]:focus,
+.form input[type="radio"]:focus,
 .form textarea:focus,
 .form select:focus
 {
@@ -150,6 +157,27 @@ h1, h2, h3 {
 .form input[type="submit"]:hover,
 .form input[type="button"]:hover{
 	background: var(--secondary-color);
+}
+
+.form.search {
+  background: none;
+  margin: 0;
+  padding: 5px;
+  max-width: 100%;
+  height: auto;
+}
+
+.form.search input {
+  display: inline-block;
+  padding: 10px;
+}
+
+.form.search input:first-child {
+  width: 70%;
+}
+
+.form.search input:last-child {
+  width: 30%;
 }
 
 /* ----- APPOINTMENTS ----- */
@@ -326,6 +354,10 @@ footer {
   text-align: center;
   line-height: 40px;
   margin-top: 20px;
+}
+
+footer p {
+  margin: 0;
 }
 
 /* ------------------------------------- */

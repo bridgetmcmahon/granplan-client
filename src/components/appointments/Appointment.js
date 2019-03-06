@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import firebase from '../../Firebase';
 
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import Emoji from 'a11y-react-emoji';
 
 class Appointment extends Component {
@@ -16,7 +18,20 @@ class Appointment extends Component {
   }
 
   _handleDeleteClick = () => {
-    this.props.deleteAppointment();
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: "Are you sure you want to delete this appointment? This action can't be undone",
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: this.props.deleteAppointment
+        },
+        {
+          label: 'No',
+          onClick: () => console.log('clicked no')
+        }
+      ]
+    });
   }
 
   nominateFamilyMember = () => {
@@ -25,7 +40,7 @@ class Appointment extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const appointmentData = {
-          family_member: user.displayName,
+          familyMember: user.displayName,
           purpose: purpose,
           patient: patient,
           date: date,
@@ -42,14 +57,14 @@ class Appointment extends Component {
   }
 
   render() {
-    const { purpose, patient, date, location, notes, family_member } = this.props.appointment;
+    const { purpose, patient, date, location, notes, familyMember } = this.props.appointment;
     const { showAppointmentInfo } = this.state;
 
     return (
       <div className="appointment-card">
         <div className="appointment-header">
           <span>
-            <i onClick={ this._handleShowClick } className="fas fa-sort-down" />
+            <i onClick={ this._handleShowClick } className="fas fa-sort-down" style={{ cursor: 'pointer' }}/>
             <h3>{ purpose }</h3>
             <p>{ date }</p>
           </span>
@@ -65,10 +80,10 @@ class Appointment extends Component {
             <p><strong>For</strong>: { patient }</p>
             <p><strong>Location</strong>: { location }</p>
             <p><strong>Notes</strong>: { notes }</p>
-            <p><strong>Family Member</strong>: { family_member }</p>
+            <p><strong>Family Member</strong>: { familyMember }</p>
 
             <span className="controls">
-              { family_member !== "" ? (
+              { familyMember !== "" ? (
                 <button
                   disabled
                   className="nominate-button disabled"

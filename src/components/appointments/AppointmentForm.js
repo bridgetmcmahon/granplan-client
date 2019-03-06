@@ -9,9 +9,10 @@ class AppointmentForm extends Component {
     time: '',
     location: '',
     notes: '',
-    family_member: '',
+    familyMember: '',
     errors: [],
     appointmentsRef: firebase.database().ref('appointments'),
+    currentUser: null,
   };
 
   // Form validations
@@ -36,8 +37,9 @@ class AppointmentForm extends Component {
 
   // Event listeners
   _handleInput = (e) => {
+    console.log(e.target.value);
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -55,7 +57,7 @@ class AppointmentForm extends Component {
         date: this.state.date,
         location: this.state.location,
         notes: this.state.notes,
-        family_member: this.state.family_member
+        familyMember: this.state.familyMember
       };
 
       if (this.props.match.params.id) {
@@ -72,7 +74,7 @@ class AppointmentForm extends Component {
     const newAppointmentKey = this.state.appointmentsRef.push().key;
 
     let updates = {};
-    updates['/' + newAppointmentKey] = appointmentData;
+    updates[`/${newAppointmentKey}`] = appointmentData;
 
     this.state.appointmentsRef.update(updates);
   }
@@ -80,7 +82,7 @@ class AppointmentForm extends Component {
   editAppointment(appointmentData) {
     const appointmentKey = this.props.match.params.id;
     let updates = {}
-    updates['/' + appointmentKey] = appointmentData;
+    updates[`/${appointmentKey}`] = appointmentData;
 
     this.state.appointmentsRef.update(updates);
   }
@@ -91,7 +93,7 @@ class AppointmentForm extends Component {
     appointmentData.once('value', (snapshot) => {
       this.setState({
         date: snapshot.val().date,
-        family_member: snapshot.val().family_member,
+        familyMember: snapshot.val().familyMember,
         location: snapshot.val().location,
         notes: snapshot.val().notes,
         patient: snapshot.val().patient,
@@ -104,10 +106,19 @@ class AppointmentForm extends Component {
     if (this.props.match.params.id) {
       this.fetchAppointment(this.props.match.params.id);
     };
+    this.fetchCurrentUser();
+  }
+
+  fetchCurrentUser() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.setState({
+        currentUser: user.displayName,
+      });
+    });
   }
 
   render() {
-    const { purpose, patient, date, time, location, notes, family_member } = this.state;
+    const { purpose, patient, date, time, location, notes, familyMember, currentUser } = this.state;
 
     return (
       <div>
@@ -144,6 +155,7 @@ class AppointmentForm extends Component {
                 onChange={ this._handleInput }
                 required
               />
+              <label htmlFor="time">Time</label>
               <input
                 type="time"
                 name="time"
@@ -167,14 +179,20 @@ class AppointmentForm extends Component {
                 placeholder="Bring scans"
                 onChange={ this._handleInput }
               />
-              <label htmlFor="family_member">Family Member</label>
+              <label htmlFor="familyMember">{`I'll take ${ patient || 'them' } to this appointment`}</label>
               <input
-                type="text"
-                name="family_member"
-                value={ family_member }
-                placeholder="Anne"
+                type="radio"
+                name="familyMember"
+                value={ currentUser }
                 onChange={ this._handleInput }
-              />
+              />Yes
+              <input
+                type="radio"
+                name="familyMember"
+                value=""
+                onChange={ this._handleInput }
+              />No
+
             <input type="submit" value={ this.props.match.params.id ? "Edit Appointment" : "Add Appointment" } />
           </form>
         </div>
