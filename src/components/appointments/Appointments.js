@@ -61,7 +61,7 @@ class Appointments extends Component {
       })
 
       this.setState({
-        appointments: appointmentsObject// snapshot.val(),
+        appointments: appointmentsObject,
       });
     });
   }
@@ -88,13 +88,15 @@ class Appointments extends Component {
     return (
       <div>
         <div className="container">
-          <div className="new-appointment">
-            <Link to="/appointments/new">
-              <i className="fas fa-plus"></i>
-              <h3>New Appointment</h3>
-            </Link>
-          </div>
-          <h1>Upcoming Appointments</h1>
+          <span className="appointments-heading">
+            <div className="new-appointment">
+              <Link to="/appointments/new">
+                <i className="fas fa-plus"></i>
+                <h3>New Appointment</h3>
+              </Link>
+            </div>
+            <h1>Upcoming Appointments</h1>
+          </span>
           <form onSubmit={ this.fetchAppointments } className="form search">
             <input
               type="search"

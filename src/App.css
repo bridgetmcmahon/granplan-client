@@ -393,6 +393,18 @@ footer p {
     line-height: 35px;
   }
 
+  .appointments-heading {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .appointments-heading * {
+    display: inline-block;
+  }
+
   .message-form {
     display: flex;
   }
