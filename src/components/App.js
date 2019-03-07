@@ -6,6 +6,7 @@ import Nav from './layout/Nav';
 import Home from './Home';
 import Login from './auth/Login';
 import Register from './auth/Register';
+import UserInfo from './UserInfo';
 import Appointments from './appointments/Appointments';
 import AppointmentForm from './appointments/AppointmentForm';
 import Chatroom from './chatroom/Chatroom';
@@ -26,8 +27,6 @@ class App extends Component {
         this.setState({
           userLoggedIn: true,
         });
-
-        // this.props.history.push('/')
       }
     });
   }
@@ -50,6 +49,7 @@ class App extends Component {
               <Route exact path="/" component={ Home } />
               <Route exact path="/login" component={ Login } />
               <Route exact path="/register" component={ Register } />
+              <Route path="/user/:id" component={ UserInfo }/>
               <Route exact path="/appointments" component={ Appointments } />
               <Route exact path="/appointments/new" component={ AppointmentForm } />
               <Route path="/appointments/:id" component={ AppointmentForm } />

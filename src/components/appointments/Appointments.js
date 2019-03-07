@@ -10,10 +10,15 @@ class Appointments extends Component {
     this.state = {
       appointments: null,
       searchTerm: '',
+      currentUserId: null,
     };
 
     firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
+      if (user) {
+        this.setState({
+          currentUserId: user.uid,
+        })
+      } else {
         this.props.history.push('/login');
       }
     })
@@ -83,7 +88,7 @@ class Appointments extends Component {
   }
 
   render() {
-    const { appointments } = this.state;
+    const { appointments, currentUserId } = this.state;
 
     return (
       <div>
@@ -97,6 +102,7 @@ class Appointments extends Component {
             </div>
             <h1>Upcoming Appointments</h1>
           </span>
+          <Link to={`/user/${ currentUserId }`}>View My Appointments</Link>
           <form onSubmit={ this.fetchAppointments } className="form search">
             <input
               type="search"
