@@ -108,7 +108,7 @@ class Appointments extends Component {
             <input
               type="search"
               name="searchTerm"
-              placeholder="Search by patient..."
+              placeholder="Show me appointments for..."
               onChange={ this._handleInput }
             />
             <input type="submit" value="Search" />
