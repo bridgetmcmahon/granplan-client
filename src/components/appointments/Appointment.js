@@ -35,7 +35,7 @@ class Appointment extends Component {
   }
 
   nominateFamilyMember = () => {
-    const { purpose, patient, date, location, notes } = this.props.appointment;
+    const { purpose, patient, date, time, location, notes } = this.props.appointment;
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -44,6 +44,7 @@ class Appointment extends Component {
           purpose: purpose,
           patient: patient,
           date: date,
+          time: time,
           location: location,
           notes: notes,
         }

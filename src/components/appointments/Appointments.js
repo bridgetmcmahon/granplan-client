@@ -82,14 +82,8 @@ class Appointments extends Component {
     firebase.database().ref('appointments').update(updates);
   }
 
-  filterAppointments = (e) => {
-    e.preventDefault();
-    this.fetchAppointments();
-  }
-
   render() {
     const { appointments } = this.state;
-    console.log(this.state);
 
     return (
       <div>
@@ -101,7 +95,7 @@ class Appointments extends Component {
             </Link>
           </div>
           <h1>Upcoming Appointments</h1>
-          <form onSubmit={ this.filterAppointments } className="form search">
+          <form onSubmit={ this.fetchAppointments } className="form search">
             <input
               type="search"
               name="searchTerm"

@@ -194,13 +194,13 @@ class AppointmentForm extends Component {
                 onChange={ this._handleInput }
               />
 
-              { this.state.familyMember && this.state.editMode ? (
+              { this.state.familyMember && this.state.editMode && (
                 <div>
                   <p>{ `${ familyMember === currentUser ? 'You are' : `${ familyMember } is` } taking ${ patient || 'them' } to this appointment`}</p>
                 </div>
-              ) : null }
+              ) }
 
-              <span style={ this.state.editMode && this.state.familyMember ? { display: 'none' } : { display: "block" } }>
+              <span>
               <label style={{ display: 'block' }} htmlFor="familyMember">{`I can take ${ patient || 'them' } to this appointment`}</label>
               <input
                 type="radio"
@@ -215,7 +215,7 @@ class AppointmentForm extends Component {
                 onChange={ this._handleInput }
               />No
               </span>
-            <input type="submit" value={ this.state.editMode ? "Edit Appointment" : "Add Appointment" } />
+            <input type="submit" value={ this.state.editMode ? "Update Appointment" : "Add Appointment" } />
           </form>
         </div>
       </div>
