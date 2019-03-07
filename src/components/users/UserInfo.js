@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import firebase from '../Firebase';
+import firebase from '../../Firebase';
 import { Link } from 'react-router-dom';
 
-import Appointment from './appointments/Appointment';
+import Appointment from '../appointments/Appointment';
 
 class UserInfo extends Component {
   constructor(props) {
@@ -56,7 +56,7 @@ class UserInfo extends Component {
           />
         )) ) : null }
 
-        <Link to='/appointments'>Back to All Appointments</Link>
+        <Link className="link" to='/appointments'>Back to All Appointments</Link>
       </div>
     );
   }

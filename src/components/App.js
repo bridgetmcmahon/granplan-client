@@ -6,7 +6,7 @@ import Nav from './layout/Nav';
 import Home from './Home';
 import Login from './auth/Login';
 import Register from './auth/Register';
-import UserInfo from './UserInfo';
+import UserInfo from './users/UserInfo';
 import Appointments from './appointments/Appointments';
 import AppointmentForm from './appointments/AppointmentForm';
 import Chatroom from './chatroom/Chatroom';
@@ -34,7 +34,7 @@ class App extends Component {
   logout = () => {
     firebase.auth().signOut().then((user) => {
       this.setState({ userLoggedIn: false })
-    })
+    });
 
     this.props.history.push('/');
   }
@@ -46,7 +46,7 @@ class App extends Component {
           <Nav userLoggedIn={ this.state.userLoggedIn } logout={ this.logout } />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={ Home } />
+              <Route user={ this.state.userLoggedIn } exact path="/" component={ Home } />
               <Route exact path="/login" component={ Login } />
               <Route exact path="/register" component={ Register } />
               <Route path="/user/:id" component={ UserInfo }/>

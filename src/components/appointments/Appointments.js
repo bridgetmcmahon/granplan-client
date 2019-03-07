@@ -102,7 +102,8 @@ class Appointments extends Component {
             </div>
             <h1>Upcoming Appointments</h1>
           </span>
-          <Link to={`/user/${ currentUserId }`}>View My Appointments</Link>
+          <hr />
+          <Link to={`/user/${ currentUserId }`} className="link">View My Appointments</Link>
           <form onSubmit={ this.fetchAppointments } className="form search">
             <input
               type="search"
