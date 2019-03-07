@@ -8,7 +8,7 @@ class Appointments extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      appointments: [],
+      appointments: null,
       searchTerm: '',
     };
 
@@ -36,25 +36,32 @@ class Appointments extends Component {
     if (this.state.searchTerm === '') {
       appointmentsData = firebase.database().ref('appointments').orderByChild('date');
     } else {
-      appointmentsData = firebase.database().ref('appointments').orderByChild('patient').equalTo(this.state.searchTerm)
+      appointmentsData = firebase.database().ref('appointments').orderByChild('patient').equalTo(this.state.searchTerm);
     }
 
     appointmentsData.on('value', (snapshot) => {
-    //   let snap = snapshot.val();
-    //   console.log(snap);
-    //   let appointmentsArray = Object.keys(snap).map((key) => {
-    //     return snap[key];
-    //   });
-    //
-    //   // Order by date
-    //   appointmentsArray.sort((a, b) => {
-    //     a = new Date(a.date);
-    //     b = new Date(b.date);
-    //     return a < b ? -1 : a > b ? 1 : 0;
-    //   });
-    //
+      let snap = snapshot.val();
+      let appointmentsArray = Object.keys(snap).map((key) => {
+        snap[key].key = key;
+        return snap[key];
+      });
+
+      // Order by date
+      appointmentsArray.sort((a, b) => {
+        a = new Date(a.date);
+        b = new Date(b.date);
+        return a < b ? -1 : a > b ? 1 : 0;
+      });
+
+      // HACKS: todo: fix the index on Firebase to return results ordered by date
+      const appointmentsObject = {};
+      appointmentsArray.forEach((a) => {
+        appointmentsObject[a.key] = a;
+        delete a.key;
+      })
+
       this.setState({
-        appointments: snapshot.val(),
+        appointments: appointmentsObject// snapshot.val(),
       });
     });
   }
@@ -82,6 +89,7 @@ class Appointments extends Component {
 
   render() {
     const { appointments } = this.state;
+    console.log(this.state);
 
     return (
       <div>

@@ -142,10 +142,10 @@ class Register extends Component {
             </form>
 
             { errors.length > 0 && (
-              <p className="error">
+              <div className="error">
                 <h3>Error</h3>
                 <p>{ errors }</p>
-              </p>
+              </div>
             ) }
 
             <p>Already a User? <Link to="/login">Login here</Link></p>

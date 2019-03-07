@@ -10,7 +10,15 @@ class Login extends Component {
     loading: false,
   }
 
-  isFormValid = ({ email, password }) => email && password;
+  isFormValid = ({ email, password }) => {
+    if (email && password) {
+      return true;
+    } else {
+      this.setState({
+        errors: 'Please fill in both fields',
+      });
+    }
+  }
 
   _handleChange = (e) => {
     this.setState({
@@ -32,19 +40,23 @@ class Login extends Component {
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then( (signedInUser) => {
           console.log(signedInUser);
+          this.props.history.push('/appointments');
+
         }).catch( (err) => {
-          console.error(err);
+          console.log(err.message);
           this.setState({
-            errors: this.state.errors.concat(err),
+            email: '',
+            password: '',
+            errors: '' + err.message,
             loading: false,
-          })
+          });
         })
-      this.props.history.push('/appointments');
     }
   }
 
   render() {
     const { email, password, errors, loading } = this.state;
+    console.log('render');
 
     return (
       <div className="small-container">
@@ -75,10 +87,10 @@ class Login extends Component {
           </form>
 
           { errors.length > 0 && (
-            <p className="error">
+            <div className="error">
               <h3>Error</h3>
               <p>{ errors }</p>
-            </p>
+            </div>
           ) }
 
           <p>Don't have an account? <Link to="/register">Register here</Link></p>

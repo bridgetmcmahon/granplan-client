@@ -19,7 +19,7 @@ class Appointment extends Component {
 
   _handleDeleteClick = () => {
     confirmAlert({
-      title: 'Confirm to delete',
+      title: 'Wait!',
       message: "Are you sure you want to delete this appointment? This action can't be undone.",
       buttons: [
         {
@@ -89,14 +89,14 @@ class Appointment extends Component {
                   disabled
                   className="nominate-button disabled"
                 >
-                  <Emoji symbol="✋🏻" label="hand" />{`I'll take ${ patient } to this one!`}
+                  <Emoji symbol="✋🏻" label="hand" />{`I can take ${ patient } to this one!`}
                 </button>
               ) : (
                 <button
                   className="nominate-button"
                   onClick={ this.nominateFamilyMember }
                 >
-                  <Emoji symbol="✋🏻" label="hand" />{`I'll take ${ patient } to this one!`}
+                  <Emoji symbol="✋🏻" label="hand" />{`I can take ${ patient } to this one!`}
                 </button>
               ) }
 

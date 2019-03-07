@@ -2,21 +2,18 @@ import React, { Component } from 'react';
 import firebase from '../../Firebase';
 
 class AppointmentForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      purpose: '',
-      patient: '',
-      date: '',
-      time: '',
-      location: '',
-      notes: '',
-      familyMember: '',
-      errors: [],
-      appointmentsRef: firebase.database().ref('appointments'),
-      currentUser: null,
-      editMode: false,
-    }
+  state = {
+    purpose: '',
+    patient: '',
+    date: '',
+    time: '',
+    location: '',
+    notes: '',
+    familyMember: '',
+    errors: [],
+    appointmentsRef: firebase.database().ref('appointments'),
+    currentUser: null,
+    editMode: false,
   };
 
   // Form validations
@@ -41,7 +38,6 @@ class AppointmentForm extends Component {
 
   // Event listeners
   _handleInput = (e) => {
-    console.log(e.target.value);
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -59,6 +55,7 @@ class AppointmentForm extends Component {
         purpose: this.state.purpose,
         patient: this.state.patient,
         date: this.state.date,
+        time: this.state.time,
         location: this.state.location,
         notes: this.state.notes,
         familyMember: this.state.familyMember
@@ -70,7 +67,6 @@ class AppointmentForm extends Component {
         this.addNewAppointment(appointmentData);
       }
 
-      this.props.history.push('/appointments');
     }
   }
 
@@ -81,14 +77,16 @@ class AppointmentForm extends Component {
     updates[`/${newAppointmentKey}`] = appointmentData;
 
     this.state.appointmentsRef.update(updates);
+    this.props.history.push('/appointments');
   }
 
   editAppointment(appointmentData) {
-    const appointmentKey = this.state.editMode;
+    const appointmentKey = this.props.match.params.id;
     let updates = {}
     updates[`/${appointmentKey}`] = appointmentData;
 
     this.state.appointmentsRef.update(updates);
+    this.props.history.push('/appointments');
   }
 
   fetchAppointment = (id) => {
@@ -97,6 +95,7 @@ class AppointmentForm extends Component {
     appointmentData.once('value', (snapshot) => {
       this.setState({
         date: snapshot.val().date,
+        time: snapshot.val().time,
         familyMember: snapshot.val().familyMember,
         location: snapshot.val().location,
         notes: snapshot.val().notes,
@@ -195,9 +194,9 @@ class AppointmentForm extends Component {
                 onChange={ this._handleInput }
               />
 
-              { this.state.familyMember ? (
+              { this.state.familyMember && this.state.editMode ? (
                 <div>
-                  <p>{ `${ familyMember === currentUser ? 'You are' : `${ familyMember } is` } taking ${ patient } to this appointment`}</p>
+                  <p>{ `${ familyMember === currentUser ? 'You are' : `${ familyMember } is` } taking ${ patient || 'them' } to this appointment`}</p>
                 </div>
               ) : null }
 

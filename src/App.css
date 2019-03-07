@@ -115,9 +115,10 @@ h1 {
 	-moz-box-sizing: border-box;
 	width: 100%;
 	background: #fff;
-	margin-bottom: 4%;
+  margin-top: 1%;
+	margin-bottom: 3%;
 	border: 1px solid #ccc;
-	padding: 3%;
+	padding: 10px;
 	color: #555;
 	font: 95% Arial, Helvetica, sans-serif;
   border-radius: 5px;
@@ -143,7 +144,8 @@ h1 {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	width: 100%;
-	padding: 3%;
+	padding: 10px;
+  margin-top: 10px;
 	background: var(--primary-color);
 	border-bottom: 2px solid var(--secondary-color);
 	border-top-style: none;
@@ -178,6 +180,14 @@ h1 {
 
 .form.search input:last-child {
   width: 30%;
+}
+
+.error {
+  background-color: #FFD6D6;
+  color: #DC143C;
+  padding: 3px 12px;
+  border: 1px solid #DC143C;
+  border-radius: 5px;
 }
 
 /* ----- APPOINTMENTS ----- */
