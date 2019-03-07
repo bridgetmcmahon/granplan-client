@@ -37,9 +37,13 @@ class Home extends Component {
               </div>
             </div>
           ) : (
-            <div className=" hero home-buttons">
-              <Link to={'/login'}>Login</Link>
-              <Link to={'/register'}>Register</Link>
+            <div className="login-register">
+              <div className="home-login hero home-buttons">
+                <Link to={'/login'}>Login</Link>
+              </div>
+              <div className="home-register hero home-buttons">
+                <Link to={'/register'}>Register</Link>
+              </div>
             </div>
           ) }
         </div>

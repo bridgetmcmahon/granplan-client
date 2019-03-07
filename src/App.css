@@ -73,6 +73,34 @@ h1, h2 {
   border-radius: 0px;
 }
 
+.login-register {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-register div {
+  display: inline-block;
+  width: 48%;
+}
+
+.home-login, .home-register {
+  height: 40vh;
+  position: relative;
+}
+
+.home-login {
+  background-image: url('./login.jpg')
+}
+
+.home-register {
+  background-image: url('./register.jpg')
+}
+
+.home-login a, .home-register a {
+  width: 100%;
+}
+
+
 .home-buttons a {
   background-color: var(--primary-color);
   color: #FFFFFF;
