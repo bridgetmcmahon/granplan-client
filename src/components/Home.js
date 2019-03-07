@@ -25,7 +25,7 @@ class Home extends Component {
         <div className="home-component">
           <div>
             <h1>Welcome to Granplan</h1>
-            <h2 style={{ color: '#8182A3' }}>The app that helps family with rostering elderly and parental care.</h2>
+            <h2 style={{ color: '#8182A3' }}>Helping families with rostering elderly and parental care.</h2>
           </div>
           { currentUser ? (
             <div>

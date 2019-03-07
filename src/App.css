@@ -1,13 +1,16 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto');
+
 
 :root {
   --primary-color: #202C59;
   --secondary-color: #8182A3;
   --heading-font: 'Roboto';
+  --secondary-font: 'Open Sans';
 }
 
 body {
   margin: 0;
+  font-family: var(--secondary-font);
 }
 
 * {
@@ -25,13 +28,13 @@ h1, h2 {
 
 /* ----- LAYOUT -----  */
 .container {
-  max-width: 360px;
+  max-width: 350px;
   margin: 0 auto;
   min-height: calc(100vh - 105px);
 }
 
 .small-container {
-  max-width: 360px;
+  max-width: 350px;
   margin: 0 auto;
   min-height: calc(100vh - 105px);
 }
@@ -114,7 +117,7 @@ h1, h2 {
 
 .nav-bar {
   display: flex;
-  max-width: 360px;
+  max-width: 350px;
   margin: 0 auto;
   color: #ffffff;
   line-height: 35px;
