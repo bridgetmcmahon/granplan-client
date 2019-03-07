@@ -51,7 +51,7 @@ h1, h2 {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 40vh;
+  height: 35vh;
   border-radius: 10px;
   padding: 0;
   margin: 10px 0 20px 0;
@@ -59,7 +59,7 @@ h1, h2 {
 }
 
 .hero-appointments {
-  background-image: url('./hero-image.jpeg');
+  background-image: url('./calendar.jpg');
 }
 
 .hero-chatroom {
