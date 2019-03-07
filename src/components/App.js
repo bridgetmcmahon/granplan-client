@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import firebase from '../Firebase';
 
 import Nav from './layout/Nav';
-import Home from './Home';
+import Home from './pages/Home';
 import Login from './auth/Login';
 import Register from './auth/Register';
 import UserInfo from './users/UserInfo';

@@ -28,13 +28,13 @@ h1, h2 {
 
 /* ----- LAYOUT -----  */
 .container {
-  max-width: 350px;
+  max-width: 345px;
   margin: 0 auto;
   min-height: calc(100vh - 105px);
 }
 
 .small-container {
-  max-width: 350px;
+  max-width: 345px;
   margin: 0 auto;
   min-height: calc(100vh - 105px);
 }
@@ -117,7 +117,7 @@ h1, h2 {
 
 .nav-bar {
   display: flex;
-  max-width: 350px;
+  max-width: 345px;
   margin: 0 auto;
   color: #ffffff;
   line-height: 35px;
