@@ -39,11 +39,8 @@ class Login extends Component {
         .auth()
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then( (signedInUser) => {
-          console.log(signedInUser);
           this.props.history.push('/appointments');
-
         }).catch( (err) => {
-          console.log(err.message);
           this.setState({
             email: '',
             password: '',
@@ -56,7 +53,6 @@ class Login extends Component {
 
   render() {
     const { email, password, errors, loading } = this.state;
-    console.log('render');
 
     return (
       <div className="small-container">
@@ -93,7 +89,7 @@ class Login extends Component {
             </div>
           ) }
 
-          <p>Don't have an account? <Link to="/register">Register here</Link></p>
+          <p>Don't have an account? <Link className="link" to="/register">Register here</Link></p>
       </div>
     );
   }

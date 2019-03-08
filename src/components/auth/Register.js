@@ -71,14 +71,12 @@ class Register extends Component {
             })
           })
           .catch((err) => {
-            console.log(err);
             this.setState({
               errors: this.state.errors.concat(err),
               loading: false,
             })
           })
         }).catch((err) => {
-          console.error(err);
           this.setState({
             errors: err,
             loading: false,
@@ -147,7 +145,7 @@ class Register extends Component {
               </div>
             ) }
 
-            <p>Already a User? <Link to="/login">Login here</Link></p>
+            <p>Already a User? <Link className="link" to="/login">Login here</Link></p>
       </div>
     );
   }

@@ -14,7 +14,6 @@ class Chatroom extends Component {
       if (user) {
         this.setState({ user: user.displayName })
       } else {
-        this.setState({ user: null })
         this.props.history.push('/login');
       }
     });

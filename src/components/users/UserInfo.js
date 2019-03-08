@@ -29,7 +29,6 @@ class UserInfo extends Component {
     const appointmentsData = firebase.database().ref('appointments').orderByChild('familyMember').equalTo(this.state.currentUser);
 
     appointmentsData.on('value', (snapshot) => {
-      console.log(snapshot.val());
       this.setState({
         appointments: snapshot.val(),
       });

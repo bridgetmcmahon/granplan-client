@@ -103,6 +103,7 @@ class Appointments extends Component {
             <h1>Upcoming Appointments</h1>
           </span>
           <hr />
+
           <Link to={`/user/${ currentUserId }`} className="link">View My Appointments</Link>
           <form onSubmit={ this.fetchAppointments } className="form search">
             <input
@@ -113,6 +114,7 @@ class Appointments extends Component {
             />
             <input type="submit" value="Search" />
           </form>
+
           { appointments ? ( Object.keys(appointments).map((key) => (
             <Appointment
               key={ key }
